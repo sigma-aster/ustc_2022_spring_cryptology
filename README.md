@@ -1,2 +1,2 @@
-# ustc_2023_spring_cryptology
+# 2023_ustc_spring_cryptology
 单表代换统计分析工具
