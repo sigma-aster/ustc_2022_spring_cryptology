@@ -222,9 +222,3 @@ def decipher (text,commad,input_dict):
         input_dict = Add_Input_Dict(input_dict)
     if commad == 4:
         input_dict = Delet_Input_Dict(input_dict)
-
-# if __name__ == '__main__':
-#     path = re.sub(r'\\','/',os.getcwd()) +'/c.txt'
-#     f=open(path,"r",encoding = "utf-8")
-#     text = f.read()
-#     decipher(text,2)
