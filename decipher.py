@@ -37,7 +37,7 @@ def combine(letter_dict,word1,word2):
     for i in range(len(word1)):
         if (type(letter_dict[word1[i]]) == str and letter_dict[word1[i]] != word2[i]):
             return False,letter_dict
-        key = get_key(letter_dict,word2[i])
+        key = get_key(letter_dict,  word2[i])
         if len(key) != 0 and letter_dict[word1[i]] != word2[i]:
             return False,letter_dict
     for i in range(len(word1)):
@@ -69,9 +69,7 @@ def Word_Frequecy(letter_dict,text):
     return letter_dict
 
 def Letter_Frequecy(letter_dict):
-    path = re.sub(r'\\','/',os.getcwd()) +'/save.json'
-    with open(path,"r",encoding='utf-8') as f:
-        load_dict = json.load(f)
+    load_dict = {"a": 64, "b": 13, "c": 22, "d": 32, "e": 103, "f": 21, "g": 15, "h": 47, "i": 57, "j": 1, "k": 5, "l": 32, "m": 20, "n": 57, "o": 63, "p": 15, "q": 1, "r": 48, "s": 51, "t": 80, "u": 23, "v": 8, "w": 18, "x": 1, "y": 16, "z": 1}
     load_dict = dict(sorted(load_dict.items(),key=lambda d: d[1], reverse=True))
     dic = {}
     for key in letter_dict:
@@ -210,15 +208,10 @@ def decipher (text,commad,input_dict):
     if commad == 2:
         letter_dict = Word_Frequecy(letter_dict,text)
         letter_dict = Letter_Frequecy(letter_dict)
-        for num in range(5):
-            dict_status = initialize_dict_status(input_dict)
-            dict_status = get(Get_Message(letter_dict,text),dict_status,5-num)
-            letter_dict,dict_status = Correct(letter_dict,dict_status,text)
+        dict_status = initialize_dict_status(input_dict)
+        dict_status = get(Get_Message(letter_dict,text),dict_status,5)
+        letter_dict,dict_status = Correct(letter_dict,dict_status,text)
     message = deciphering(letter_dict,text)
     for key in list(input_dict.keys()):
         letter_dict[key] = letter_dict[key] + '*'
     return message,re.sub(r'[{} \' 0]','',re.sub(',','\n',str(letter_dict)))
-    if commad == 3:
-        input_dict = Add_Input_Dict(input_dict)
-    if commad == 4:
-        input_dict = Delet_Input_Dict(input_dict)
